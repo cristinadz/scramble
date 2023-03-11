@@ -1,12 +1,21 @@
-import React from 'react'
-import LoginForm from '../components/LoginForm'
-import SignUpForm from '../components/SignUpForm'
+import {
+  Flex,
+  Container,
+  Heading,
+  Stack,
+  Text,
+  Button,
+  Icon,
+  IconProps,
+} from '@chakra-ui/react';
 
 function Home() {
   return (
-    <div>
-        <LoginForm/>
-        <SignUpForm/>
+    <div >
+      <Container >
+        <Stack></Stack>
+        welcome
+      </Container>
     </div>
   )
 }

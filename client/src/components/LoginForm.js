@@ -1,14 +1,24 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
-
 import { useRecoilState } from "recoil";
 import { currentUserState, currentAuthState } from "../recoil/atoms";
 import api from "../api/posts";
 
+// STYLING
+import {
+	Heading,
+	FormControl,
+	FormLabel,
+	Input,
+	Button,
+	Alert,
+	AlertIcon,
+	AlertTitle,
+} from "@chakra-ui/react";
+
 function LoginForm() {
 	let navigate = useNavigate();
 	const userRef = useRef();
-	const errRef = useRef();
 	const [loginForm, setLoginForm] = useState("");
 	const [errorMessage, setErrorMessage] = useState("");
 	const [currentUser, setCurrentUser] = useRecoilState(currentUserState);
@@ -47,11 +57,11 @@ function LoginForm() {
 			if (!err?.response) {
 				setErrorMessage("No Server Response");
 			} else if (err.response?.status === 400) {
-				setErrorMessage("Missing Username or Password");
+				setErrorMessage("Missing Email or Password");
 			} else if (err.response?.status === 401) {
 				setErrorMessage("Unauthorized");
 			} else {
-				setErrorMessage("Login Failed");
+				setErrorMessage("Incorrect Credentials");
 			}
 			// errRef.current.focus()
 		}
@@ -59,24 +69,32 @@ function LoginForm() {
 
 	return (
 		<div>
-			<h1> Sign In </h1>
+			<Heading> Sign In </Heading>
 			<form onSubmit={handleSubmit}>
-				<label>Email</label>
-				<input
-					type="text"
-					name="username"
-					value={loginForm.username}
-					onChange={handleChange}
-				/>
-				<label>Password</label>
-				<input
-					type="text"
-					name="password"
-					value={loginForm.password}
-					onChange={handleChange}
-				/>
-				<button>Sign In</button>
+				<FormControl>
+					<FormLabel>Email</FormLabel>
+					<Input
+						// variant="flushed"
+						type="text"
+						name="username"
+						value={loginForm.username}
+						onChange={handleChange}
+					/>
+					<FormLabel>Password</FormLabel>
+					<Input
+						type="text"
+						name="password"
+						value={loginForm.password}
+						onChange={handleChange}
+					/>
+					<Button type="submit">Sign In</Button>
+				</FormControl>
 			</form>
+			{ errorMessage ? 
+			<Alert status="error" variant="subtle">
+				<AlertIcon />
+				<AlertTitle> {errorMessage}</AlertTitle>
+			</Alert> : null }
 		</div>
 	);
 }
