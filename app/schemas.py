@@ -74,7 +74,8 @@ class Business(BaseModel):
     rating: Optional[int]
     price: Optional[str]
     location: Optional[dict]
-    distance: Optional[int]
+    is_closed: Optional[bool]
+    transactions: Optional[list]
     class Config:
         orm_mode = True
 
