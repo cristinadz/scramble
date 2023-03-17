@@ -79,7 +79,7 @@ function SearchForm() {
 								<VStack align="left" spacing={0}>
 									<FormLabel>Location</FormLabel>
 									<Input
-										placeholder="Los Angeles"
+										placeholder="Chicago"
 										type="text"
 										name="location"
 										value={terms.location}
