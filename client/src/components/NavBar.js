@@ -14,8 +14,7 @@ function NavBar() {
 						<NavLink to={"/businesses"}> explore</NavLink>
 						<NavLink to={"/favorites"}> favorites</NavLink>
 						<NavLink to={"/profile"}> profile</NavLink>
-						<Button bg="#505168" color="white" size='sm' as={NavLink} to={"/login"} borderRadius="30px"> log in </Button>
-            {/* <Button bg="#DCC48E" color="black" fontWeight="normal" size='sm' as={NavLink} to={"/login"} borderRadius="30px"> sign up </Button> */}
+						<Button bg="#27233A" color="white" size='sm' as={NavLink} to={"/login"} borderRadius="30px"> log in </Button>
 					</HStack>
 				</Flex>
 			</Box>

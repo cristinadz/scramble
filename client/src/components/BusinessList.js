@@ -1,17 +1,14 @@
-import BusinessCard from './BusinessCard.js'
+import BusinessCard from "./BusinessCard.js";
 import { useRecoilValue } from "recoil";
 import { businessesState } from "../recoil/atoms";
- 
+
 function BusinessList() {
 	const businesses = useRecoilValue(businessesState);
-    const renderedBusinesses = businesses.map((business) => <BusinessCard key={business.id} business={business} />)
+	const renderedBusinesses = businesses.map((business) => (
+		<BusinessCard key={business.id} business={business} />
+	));
 
-  return (
-    <div>
-        {renderedBusinesses}
-    </div>
-
-  )
+	return <>{renderedBusinesses}</>;
 }
 
-export default BusinessList
+export default BusinessList;

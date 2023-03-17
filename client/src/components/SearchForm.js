@@ -13,7 +13,7 @@ import {
 	HStack,
 	Box,
 	VStack,
-    Center,
+	Center,
 } from "@chakra-ui/react";
 import { SearchIcon } from "@chakra-ui/icons";
 
@@ -47,7 +47,7 @@ function SearchForm() {
 
 	return (
 		<>
-			<Center margin='20px'>
+			<Center margin="20px">
 				<form onSubmit={getBusinesses}>
 					<FormControl>
 						<HStack>
@@ -79,7 +79,7 @@ function SearchForm() {
 								<VStack align="left" spacing={0}>
 									<FormLabel>Location</FormLabel>
 									<Input
-										placeholder="Los Angeles"
+										placeholder="Chicago"
 										type="text"
 										name="location"
 										value={terms.location}
@@ -87,7 +87,10 @@ function SearchForm() {
 									/>
 								</VStack>
 							</Box>
-							<IconButton icon={<SearchIcon />}>Search</IconButton>
+							<VStack>
+								
+							<IconButton marginTop='30px' icon={<SearchIcon />} type='submit'>Search</IconButton>
+							</VStack>
 						</HStack>
 					</FormControl>
 				</form>

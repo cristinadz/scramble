@@ -139,8 +139,7 @@ function SignUpForm() {
 								handleImageSubmit(imageSrc);
 							}}
 						>
-							{" "}
-							Sign Up{" "}
+							Sign Up
 						</Button>
 					</div>
 				) : (

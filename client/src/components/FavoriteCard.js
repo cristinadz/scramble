@@ -1,58 +1,69 @@
 import { useState } from "react";
-import { useNavigate } from "react-router";
-import Rating from "./Rating";
-import Star from "./Star";
+import RatingForm from "./RatingForm";
+import RatingShow from "./RatingShow";
+import { BsSuitHeartFill } from "react-icons/bs";
+
+//STYLING
+import { Button, Image, Text, HStack, Flex, Stack, useColorModeValue } from "@chakra-ui/react";
 
 function FavoriteCard({ favorite, deleteFavorite, togglePopUp }) {
-	const {id, name, image_url, location_city, location_state, rating, price, comment, business_id}=favorite
-	const [ratingShow, setRatingShow] = useState(false);
-	const GRADES = ["Poor", "Fair", "Good", "Very good", "Excellent"];
-	const gradeIndex = rating;
-	const activeStar = {
-		fill: "yellow",
-	};
+	const { id, name, image_url, location_city, location_state, rating, price, comment, business_id,} = favorite;
+	const [showEditForm, setShowEditForm] = useState(false);
+	const handleShowEditFrom = () => setShowEditForm(!showEditForm);
 
-	const handleDelete = () => deleteFavorite(id)
-	const handleRatingShow = () => setRatingShow(!ratingShow);
-  	const handlePopUp = () => togglePopUp(business_id)
+	const handleDelete = () => deleteFavorite(id);
+	// const handlePopUp = () => togglePopUp(business_id);
 
 	return (
-		<div >
-			<h3>{name}</h3>
-			<img onClick={handlePopUp} src={image_url} alt={name} />
-			<h4>{price}</h4>
-			<h4>
-				{location_city},{location_state}
-			</h4>
-			{rating ? (
-				<div>
-					<div className="stars">
-						{GRADES.map((grade, index) => (
-							<Star
-								key={grade}
-								rating={rating}
-								style={
-									gradeIndex != null && gradeIndex >= index
-										? activeStar
-										: {}
-								}
-							/>
-						))}
-					</div>
-					<h4>Comment: {comment}</h4>
-					<button onClick={handleRatingShow}>
-						{ratingShow ? "Close" : "Edit Rating"}
-					</button>
-				</div>
-			) : (
-				<div>
-					<button onClick={handleRatingShow}>{ratingShow ? "Close" : "Add Rating"}</button>
-				</div>
-			)}
-			{ratingShow ? <h4>Rating: {<Rating favorite={favorite} />}</h4> : null}
-			<button onClick={handleDelete}>Delete</button>
-		</div>
+		<>
+			<Stack
+				w={{ sm: "70%", md: "600px" }}
+				height={{ sm: "70%", md: "20rem" }}
+				direction={{ base: "column", md: "row", lg: "row" }}
+				bg={useColorModeValue("white", "gray.900")}
+				boxShadow={"2xl"}
+				padding={4}
+			>
+				<Flex flex={1}>
+					<Image
+						alt={id}
+						objectFit="cover"
+						boxSize="100%"
+						src={image_url}
+					/>
+				</Flex>
+				<Stack flex={1} flexDirection="column" alignItems="left" padding={2}>
+					<Text fontSize={"2xl"}> {name} </Text>
+					<HStack>
+						<Text color={"gray.500"}>
+							{location_city}, {location_state}
+						</Text>
+						<Text color={"gray.400"}> · {price} </Text>
+					</HStack>
+					
+					{rating && showEditForm == false ? (
+						<> 
+							<RatingShow  rating={rating} iconType={BsSuitHeartFill} />
+							<Text> comment: {comment} </Text>
+							<Stack > 
+							<Button size='sm'  maxW='70px' borderRadius='30px' marginBottom={2} color="grey" variant={'link'}  onClick={handleShowEditFrom}>
+								edit rating
+							</Button>
+							</Stack>
+							</>
+					) : (
+						<> 
+						{ showEditForm ? null : <Button color="tomato" variant={'outline'} colorScheme="tomato" borderRadius='30px' size='sm' onClick={handleShowEditFrom}>add rating</Button> }
+						</>
+					)}
+
+					{showEditForm ? <RatingForm id={id} currentComment ={comment}/> : null}
+					{showEditForm ? null :  <Button bg="tomato" color='white' borderRadius='30px' size='sm' onClick={handleDelete}>delete</Button>}</Stack>
+				
+			</Stack>
+		</>
 	);
 }
 
 export default FavoriteCard;
+

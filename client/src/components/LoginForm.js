@@ -74,7 +74,6 @@ function LoginForm() {
 				<FormControl>
 					<FormLabel>Email</FormLabel>
 					<Input
-						// variant="flushed"
 						type="text"
 						name="username"
 						value={loginForm.username}

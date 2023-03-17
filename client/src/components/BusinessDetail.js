@@ -2,7 +2,7 @@ import api from "../api/posts.js";
 import { useEffect, useState } from "react";
 
 function BusinessDetail({ togglePopUp, business }) {
-	console.log(business);
+	
 	// const getBusiness = async () => {
 	// 	try {
 	// 		const response = await api.get(`businesses/${id}`, {
