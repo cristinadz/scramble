@@ -1,21 +1,11 @@
 import { useRecoilState } from "recoil";
-import { useState } from "react";
-import api from "../api/posts.js";
+import { useState, useEffect } from "react";
 import { businessesState } from "../recoil/atoms";
-import { useEffect } from "react";
+import api from "../api/axios.js";
 
 //STYLING
-import {
-	FormControl,
-	FormLabel,
-	Input,
-	IconButton,
-	HStack,
-	Box,
-	VStack,
-	Center,
-} from "@chakra-ui/react";
 import { SearchIcon } from "@chakra-ui/icons";
+import {FormControl, FormLabel, Input, IconButton, HStack, Box, VStack, Center} from "@chakra-ui/react";
 
 function SearchForm() {
 	const [businesses, setBusinesses] = useRecoilState(businessesState);

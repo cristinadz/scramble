@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { currentUserState, currentAuthState } from "../recoil/atoms";
-import api from "../api/posts";
+import api from "../api/axios";
 
 // STYLING
 import {

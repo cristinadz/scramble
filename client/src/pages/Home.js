@@ -41,8 +41,8 @@ function Home() {
 						button.
 					</Text>
           <HStack>
-            <Button bg="tomato" color="white" size='md' as={NavLink} to={"/login"} borderRadius="30px"> log in </Button>
-            <Button color="tomato" variant={'outline'} colorScheme="tomato" size='md' as={NavLink} to={"/login"} borderRadius="30px">  sign up</Button>
+            <Button bg="tomato" color="white" size='lg' as={NavLink} to={"/login"} borderRadius="30px"> log in </Button>
+            <Button color="tomato" variant={'outline'} colorScheme="tomato" size='lg' as={NavLink} to={"/login"} borderRadius="30px">  sign up</Button>
           </HStack>
 				</VStack>
 			</Container>
