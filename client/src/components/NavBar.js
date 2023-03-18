@@ -7,7 +7,7 @@ function NavBar() {
 			<Box px={4} bg='#EAEFD3'>
 				<Flex h={16} alignItems={"center"} justifyContent={"space-between"}>
 					<HStack spacing={8} alignItems={"center"}>
-						<Box as={NavLink} to={"/"} color='tomato' fontWeight="bolder" fontSize="xl"> scramble </Box>
+						<Box as={NavLink} to={"/"} color='tomato' fontWeight="bolder" fontSize="2xl"> scramble </Box>
 					</HStack>
 					<HStack as={"nav"} spacing={7}>
 				

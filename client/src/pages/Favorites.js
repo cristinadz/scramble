@@ -1,157 +1,105 @@
-import { useEffect, useState, useMemo, useCallback } from "react";
+import { useMemo, useState } from "react";
 import { useRecoilValue } from "recoil";
-import { currentUserState } from "../recoil/atoms";
-import FavoriteCard from "../components/FavoriteCard.js";
-import BusinessDetail from "../components/BusinessDetail";
-import api from "../api/posts";
+import { favoritesState } from "../recoil/atoms";
+import FavoriteList from "../components/FavoriteList";
+import FavoriteFilter from "../components/FavoriteFilter.js";
+import {
+	Button,
+	Stack,
+	Container,
+	Box,
+	Flex,
+	Center,
+	Square,
+} from "@chakra-ui/react";
 
 function Favorites() {
-	const currentUser = useRecoilValue(currentUserState);
-    const [random, setRandom] = useState(null)
-	const [favorites, setFavorites] = useState([]);
+	const favorites = useRecoilValue(favoritesState);
 	const [priceFilter, setPriceFilter] = useState();
-	const [popUp, setPopUp] = useState(false)
-	const [business, setBusiness] = useState()
+	const [random, setRandom] = useState(null);
 
-	useEffect(() => {
-		getFavorites();
-	}, []);
- 
-	const getFavorites = async () => {
-		try {
-			const response = await api.get("favorites", {
-				headers: { Authorization: `Bearer ${currentUser.access_token}` },
-				params: { id: currentUser.user },
-			});
-			setFavorites(response.data.sort((a,b) => (a.id > b.id) ? 1 : ((b.id > a.id) ? -1 : 0)))
-		} catch (error) {
-			console.log(error);
-		}
-	};
-
-	const deleteFavorite = async (id) => {
-		try {
-			await api.delete(`favorites/${id}`, { headers: { Authorization: `Bearer ${currentUser.access_token}` } })
-			setFavorites(favorites => favorites.filter( favorite => { return favorite.id !== id} ))
-		} catch (error) {
-			console.log(error);
-		}
-	}
-
-    const handleClick = () => {
-        const randNum = Math.floor(Math.random() * favorites.length);
-        setRandom(favorites[randNum])
-    }
-    const handleBack = () => {
-        setRandom(null)
-    }
-	const handleChange = (e) => {
-		setPriceFilter(e.target.value);
-	};
 	const getFilteredList = () => {
 		if (!priceFilter) {
 			return favorites;
 		}
 		return favorites.filter((fav) => fav.price === priceFilter);
 	};
-	
-	const togglePopUp = (id) => {
-		setPopUp(!popUp)
-		getBusiness(id)
-}
-
-const getBusiness = useCallback (async (id) => {
-	try {
-		const response = await api.get(`businesses/${id}`, {
-			params: { id: id },
-		});
-		console.log(response.data.name)
-		setBusiness(response.data)
-		console.log(business)
-	} catch (error) {
-		console.log(error);
-	}
-}, [])
-useEffect(() => {
-	getBusiness();
-}, []);
-
 
 	const filteredList = useMemo(getFilteredList, [priceFilter, favorites]);
 
-	const renderedFavorites = filteredList.map((favorite) => (
-		<FavoriteCard key={favorite.id} favorite={favorite} deleteFavorite = {deleteFavorite} togglePopUp={togglePopUp} />
-	));
+	const handleFilter = (price) => {
+		setPriceFilter(price);
+	};
 
-	const compare = (a, b, ascendingOrder) => {
-		if (a < b) {
-		  return ascendingOrder ? -1 : 1;
-		}
-		if (a > b) {
-		  return ascendingOrder ? 1 : -1;
-		}
-		return 0;
-	  }
-	const handleSort = (value) => {
-		if(value == 'none'){
-			setFavorites([...favorites])
-		} else {
-		  let toType, toAscending
-		  switch(value){
-			case 'ascending' : toType = true; toAscending = true; break;
-			case 'descending' : toType = true; toAscending = false; break;
-			case 'high' : toType = false; toAscending = true; break;
-			case 'low' : toType = false; toAscending = false; break;
-		  }
-		  let current = [...favorites]
-		  current.sort((a, b) => toType ?
-				 compare(a.name, b.name, toAscending) 
-				 : 
-				 compare(a.price, b.price, toAscending))
-		  setFavorites([...current])
-		}
-	  }
-	  
-
+	const handleRandomClick = () => {
+		const randNum = Math.floor(Math.random() * favorites.length);
+		setRandom(favorites[randNum]);
+	};
 	return (
-		<div>
-			{popUp ? (<BusinessDetail togglePopUp={togglePopUp} business={business} />) : (
-				<div>
-					<h1>Favorite Businesses</h1>
-					<label>
-						Sort By:
-						<select onChange={(e) => handleSort(e.target.value)}>
-							<option value="none">Default</option>
-							<option value="ascending">Alphabetically, A-Z</option>
-							<option value="descending">Alphabetically, Z-A</option>
-							{/* <option value="high">Low to high</option>
-								<option value="low">High to low</option> */}
-						</select>
-					</label>
-					<label>
-						Filter By Price:
-						<select value={priceFilter} onChange={handleChange}>
-							<option value="$">$</option>
-							<option value="$$">$$</option>
-							<option value="$$$">$$$</option>
-							<option value={""}>all</option>
-						</select>
-					</label>
-					<button onClick={handleClick}>Random Business</button>
-					<button onClick={handleBack}>Back</button>
+		<Container maxW={"7xl"}>
+			<Stack
+				spacing={{ base: 8, md: 10 }}
+				py={{ base: 20, md: 28 }}
+				direction={{ base: "column", md: "row" }}
+			>
+				<Stack
+					h="100%"
+					flex={1}
+					spacing={{ base: 5, md: 10 }}
+					bg="#EDF2F6"
+					borderRadius="30px"
+					p={8}
+				>
+					<FavoriteFilter
+						handleFilter={handleFilter}
+						priceFilter={priceFilter}
+					/>
+					<Button
+						bg="#B3C0A4"
+						color="black"
+						fontWeight={"normal"}
+						fontSize="lg"
+						borderRadius="30px"
+						onClick={handleRandomClick}
+					>
+						pick for me!
+					</Button>
 					{random ? (
-						<FavoriteCard
-							key={random.id}
-							favorite={random}
-							deleteFavorite={deleteFavorite}
-							togglePopUp={togglePopUp}
-						/>
-					) : (renderedFavorites)
-					}
-				</div>
-			)}
-		</div>
+						<Button onClick={() => setRandom(null)}>Back</Button>
+					) : null}
+				</Stack>
+				<Flex
+					flex={1}
+					justify={"center"}
+					align={"center"}
+					position={"relative"}
+					w={"full"}
+				>
+					<FavoriteList filteredList={filteredList} random={random} />
+				</Flex>
+			</Stack>
+		</Container>
 	);
 }
 
 export default Favorites;
+{
+	/* <SimpleGrid columns={[1, 1, 2]} >
+<Container w={{ sm: "60%", md: "50%", lg: "0%" }} pt={9} >
+	<Stack flexDirection="column" bg="grey" p={9} borderRadius='30px' spacing={5}>
+		<FavoriteFilter
+			handleFilter={handleFilter}
+			priceFilter={priceFilter}
+		/>
+
+		<Button onClick={handleRandomClick}>pick for me!</Button>
+		{random ? (
+			<Button onClick={() => setRandom(null)}>Back</Button>
+		) : null}
+	</Stack>
+</Container>
+<Center pt={9} pr={9}>
+	<FavoriteList filteredList={filteredList} random={random} />
+</Center>
+</SimpleGrid> */
+}

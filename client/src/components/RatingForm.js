@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useRecoilValue } from "recoil";
 import { currentUserState } from "../recoil/atoms";
-import api from "../api/posts";
+import api from "../api/axios";
 
 //STYLING
 import { Icon, HStack, Textarea, Button } from "@chakra-ui/react";

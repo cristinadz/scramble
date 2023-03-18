@@ -1,6 +1,6 @@
 import { useRecoilValue } from "recoil";
 import { currentUserState } from "../recoil/atoms";
-import api from "../api/posts.js";
+import api from "../api/axios.js";
 import { useState } from "react";
 import RatingShow from "./RatingShow";
 import BusinessBadge from "./BusinessBadge";
@@ -43,7 +43,7 @@ function BusinessCard({ business }) {
 			<Center py={1}>
 				<Stack
 					w={{ sm: "70%", md: "600px" }}
-					height={{ sm: "70%", md: "20rem" }}
+					height={{ sm: "70%", md: "23rem" }}
 					direction={{ base: "column", md: "row", lg: "row" }}
 					bg={useColorModeValue("white", "gray.900")}
 					boxShadow={"2xl"}

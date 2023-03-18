@@ -15,16 +15,8 @@ export const businessesState = atom({
     default: []
 })
 
-export const detailPopUpState = atom({
-    key: 'detailPopUpState',
-    default: false
+export const favoritesState = atom({
+    key: 'favoritesState',
+    default: []
 })
 
-// export const detailBusinessState = atom({
-//     key: 'detailBusinessState',
-//     default: []
-// })
-// export const detailLocationState = atom({
-//     key: 'detailLocationState',
-//     default: {}
-// })
