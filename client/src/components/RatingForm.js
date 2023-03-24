@@ -46,7 +46,7 @@ function FavoriteRating({ id , currentComment }) {
 	return (
 		<div>
 			<form onSubmit={handleSubmit}>
-				<HStack>{renderedRatings} </HStack>
+				<HStack pb={3}>{renderedRatings} </HStack>
 				<Textarea
 					value={ currentComment }
 					placeholder="Notes on your experience here..."
@@ -54,8 +54,9 @@ function FavoriteRating({ id , currentComment }) {
 					rows="3"
 					cols="50"
 					onChange={(e) => setComment(e.target.value)}
+					
 				></Textarea>
-                <Button borderRadius='30px' color='white' bg='tomato' size='sm'  _hover={{ bg:'RGBA(0, 0, 0, 0.15)', color: 'tomato' }} type="submit"> submit</Button>
+                <Button my={3} borderRadius='30px' color='white' bg='tomato' size='sm'  _hover={{ bg:'RGBA(0, 0, 0, 0.15)', color: 'tomato' }} type="submit"> submit</Button>
 			</form>
 		</div>
 	);

@@ -2,7 +2,7 @@ import { Select, Text } from "@chakra-ui/react";
 import { useRecoilState } from "recoil";
 import { favoritesState } from "../recoil/atoms";
 
-function FavoriteFilter({ handleFilter, priceFilter }) {
+function FavoriteFilter({ handleFilter, filter }) {
 	const [favorites, setFavorites] = useRecoilState(favoritesState);
 
 	const compare = (a, b, ascendingOrder) => {
@@ -55,7 +55,7 @@ function FavoriteFilter({ handleFilter, priceFilter }) {
 		<>
 			<label>
 				<Text pb={2} fontSize="lg">
-					sort by: <br />
+					Sort: <br />
 				</Text>
 				<Select bg="white" onChange={(e) => handleSort(e.target.value)}>
 					<option value="none">default</option>
@@ -65,14 +65,22 @@ function FavoriteFilter({ handleFilter, priceFilter }) {
 			</label>
 			<label>
 				<Text pb={2} fontSize="lg">
-					filter by price: <br />
+					Filter By: <br />
 				</Text>
-
-				<Select bg="white" value={priceFilter} onChange={handleChange}>
+				<Text pt={3}> Price</Text>
+				<Select bg="white" value={filter} onChange={handleChange}>
 				<option value={""}>all</option>
 					<option value="$">$</option>
 					<option value="$$">$$</option>
 					<option value="$$$">$$$</option>
+					
+				</Select>
+				<Text pt={3}>  Collection </Text>
+				<Select bg="white" value={filter} onChange={handleChange}>
+				<option value={""}>all</option>
+					<option value="Food">Food</option>
+					<option value="Bars">Bars</option>
+					<option value="Health & Beauty">Health & Beauty</option>
 					
 				</Select>
 			</label>
