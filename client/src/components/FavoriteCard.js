@@ -15,24 +15,13 @@ import {
 } from "@chakra-ui/react";
 
 function FavoriteCard({ favorite, deleteFavorite }) {
-	const {
-		id,
-		name,
-		image_url,
-		location_city,
-		location_state,
-		rating,
-		price,
-		comment,
-	} = favorite;
+	const { id, name, image_url, location_city, location_state, rating, price, comment } = favorite;
 	const [showEditForm, setShowEditForm] = useState(false);
-
 	const handleShowEditFrom = () => setShowEditForm(!showEditForm);
 	const handleDelete = () => deleteFavorite(id);
 
 	return (
 		<Stack
-			// w={{ sm: "70%", md: "80%", lg: '80%' }}
 			height={{ sm: "70%", md: "21rem" }}
 			direction={{ base: "column", md: "row", lg: "row" }}
 			bg={useColorModeValue("white", "gray.900")}
@@ -65,7 +54,7 @@ function FavoriteCard({ favorite, deleteFavorite }) {
 						<Stack>
 							<Button
 								size="md"
-								alignSelf='baseline'
+								alignSelf="baseline"
 								borderRadius="30px"
 								marginBottom={2}
 								color="grey"

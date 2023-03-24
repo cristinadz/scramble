@@ -16,19 +16,22 @@ import {
 function Favorites() {
 	const favorites = useRecoilValue(favoritesState);
 	const [priceFilter, setPriceFilter] = useState();
+	const [filter, setFilter] = useState()
+	
+
 	const [random, setRandom] = useState(null);
 
 	const getFilteredList = () => {
-		if (!priceFilter) {
+		if (!filter) {
 			return favorites;
 		}
-		return favorites.filter((fav) => fav.price === priceFilter);
+		return favorites.filter((fav) => fav.collection === filter || fav.price === filter)
 	};
 
-	const filteredList = useMemo(getFilteredList, [priceFilter, favorites]);
+	const filteredList = useMemo(getFilteredList, [filter, favorites]);
 
-	const handleFilter = (price) => {
-		setPriceFilter(price);
+	const handleFilter = (chosenFilter) => {
+		setFilter(chosenFilter);
 	};
 
 	const handleRandomClick = () => {
@@ -50,9 +53,10 @@ function Favorites() {
 					borderRadius="30px"
 					p={8}
 				>
-					<FavoriteFilter
+					<FavoriteFilter 
 						handleFilter={handleFilter}
-						priceFilter={priceFilter}
+						filter={filter}
+						
 					/>
 					<Button
 						bg="#B3C0A4"
@@ -62,10 +66,15 @@ function Favorites() {
 						borderRadius="30px"
 						onClick={handleRandomClick}
 					>
-						pick for me!
+						Random
 					</Button>
 					{random ? (
-						<Button onClick={() => setRandom(null)}>Back</Button>
+						<Button 
+						bg={"white"}
+						fontWeight={"normal"}
+						fontSize="lg"
+						borderRadius="30px"
+						onClick={() => setRandom(null)}>Back</Button>
 					) : null}
 				</Stack>
 				<Flex
