@@ -45,7 +45,7 @@ function FavoriteCard({ favorite, deleteFavorite }) {
 					<Text color={"gray.400"}> · {price} </Text>
 				</HStack>
 
-				{rating && showEditForm == false ? (
+				{rating && showEditForm === false ? (
 					<>
 						<RatingShow rating={rating} iconType={BsSuitHeartFill} />
 						<Text fontWeight={"bold"}> review: </Text>

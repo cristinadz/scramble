@@ -38,7 +38,7 @@ async def delete_favorite(id: int, db: Session = Depends(get_db), current_user: 
     # find the index in the array that has required ID
 
     favorite_query = db.query(models.Favorite).filter(models.Favorite.id == id)
-
+ 
     favorite = favorite_query.first()
 
     if favorite == None:

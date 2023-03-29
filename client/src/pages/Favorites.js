@@ -3,19 +3,10 @@ import { useRecoilValue } from "recoil";
 import { favoritesState } from "../recoil/atoms";
 import FavoriteList from "../components/FavoriteList";
 import FavoriteFilter from "../components/FavoriteFilter.js";
-import {
-	Button,
-	Stack,
-	Container,
-	Box,
-	Flex,
-	Center,
-	Square,
-} from "@chakra-ui/react";
+import { Button, Stack, Text, Container, Flex } from "@chakra-ui/react";
 
 function Favorites() {
 	const favorites = useRecoilValue(favoritesState);
-	const [priceFilter, setPriceFilter] = useState();
 	const [filter, setFilter] = useState()
 	
 
@@ -40,11 +31,14 @@ function Favorites() {
 	};
 	return (
 		<Container maxW={"7xl"}>
+			<Text fontWeight={'bold'} py={4} align={'center'} fontSize={'3xl'}> Favorite Businesses</Text>
+
 			<Stack
 				spacing={{ base: 8, md: 10 }}
-				py={{ base: 20, md: 28 }}
+				py={{ base: 5, md: 10 }}
 				direction={{ base: "column", md: "row" }}
 			>
+				
 				<Stack
 					h="100%"
 					flex={1}
@@ -53,6 +47,7 @@ function Favorites() {
 					borderRadius="30px"
 					p={8}
 				>
+					
 					<FavoriteFilter 
 						handleFilter={handleFilter}
 						filter={filter}
@@ -92,23 +87,4 @@ function Favorites() {
 }
 
 export default Favorites;
-{
-	/* <SimpleGrid columns={[1, 1, 2]} >
-<Container w={{ sm: "60%", md: "50%", lg: "0%" }} pt={9} >
-	<Stack flexDirection="column" bg="grey" p={9} borderRadius='30px' spacing={5}>
-		<FavoriteFilter
-			handleFilter={handleFilter}
-			priceFilter={priceFilter}
-		/>
 
-		<Button onClick={handleRandomClick}>pick for me!</Button>
-		{random ? (
-			<Button onClick={() => setRandom(null)}>Back</Button>
-		) : null}
-	</Stack>
-</Container>
-<Center pt={9} pr={9}>
-	<FavoriteList filteredList={filteredList} random={random} />
-</Center>
-</SimpleGrid> */
-}

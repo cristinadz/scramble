@@ -20,7 +20,6 @@ function App() {
 				<Route path="/favorites" element={<Favorites />} />
         		<Route path="/login" element={<Login />} />
 				<Route path="/signup" element={<SignUp />} />
-
 			</Routes>
 		</div>
 	);

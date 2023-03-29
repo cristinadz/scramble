@@ -1,10 +1,9 @@
-import  { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef } from "react";
 
 import { useRecoilState } from "recoil";
 import { currentUserState, currentAuthState } from "../recoil/atoms";
 import api from "../api/axios";
 import { useNavigate, Link as ReactLink } from "react-router-dom";
-
 
 // STYLING
 import {
@@ -12,7 +11,7 @@ import {
 	FormLabel,
 	Input,
 	Button,
-  Link,
+	Link,
 	Alert,
 	AlertIcon,
 	AlertTitle,
@@ -26,7 +25,6 @@ function Login() {
 	const [loginForm, setLoginForm] = useState("");
 	const [errorMessage, setErrorMessage] = useState("");
 	const [currentUser, setCurrentUser] = useRecoilState(currentUserState);
-	const [currentAuth, setCurrentAuth] = useRecoilState(currentAuthState);
 
 	// useEffect(() => {
 	//     userRef.current.focus()
@@ -97,7 +95,6 @@ function Login() {
 						Log in
 					</Button>
 				</FormControl>
-				<Text></Text>
 			</form>
 			{errorMessage ? (
 				<Alert status="error" color="red.600" bg={"white"}>
@@ -105,8 +102,10 @@ function Login() {
 					<AlertTitle> {errorMessage}</AlertTitle>
 				</Alert>
 			) : null}
-      <Text mt={5}> Don't have an account? {' '}
-      <Link as={ReactLink} to="/signup" color='tomato'>Sign Up </Link> </Text>
+			<Text mt={5}>
+				Don't have an account?
+				<Link as={ReactLink} to="/signup" color="tomato">Sign Up</Link>
+			</Text>
 		</Container>
 	);
 }

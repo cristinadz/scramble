@@ -3,7 +3,7 @@ import api from "../api/axios";
 import { useRecoilValue, useRecoilState } from "recoil";
 import { favoritesState, currentUserState } from "../recoil/atoms";
 import FavoriteCard from "./FavoriteCard";
-import { Container, Stack, Box } from "@chakra-ui/react";
+import { Stack } from "@chakra-ui/react";
 
 function FavoriteList({ filteredList, random }) {
 	const [favorites, setFavorites] = useRecoilState(favoritesState);

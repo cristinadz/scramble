@@ -31,9 +31,9 @@ function SearchForm() {
 		}
 	};
 
-	useEffect(() => {
-		getBusinesses();
-	}, []);
+	// useEffect(() => {
+	// 	getBusinesses();
+	// }, []);
 
 	return (
 		<>
