@@ -6,7 +6,8 @@ from .config import settings
 # from psycopg2.extras import RealDictCursor
 # import time
 
-SQLALCHEMY_DATABASE_URL = 'postgresql://cristinadiaz:pacoyxela@localhost:5432/foodster'
+# SQLALCHEMY_DATABASE_URL = 'postgresql://<username>:<password>@<ip-address/hostname>/<database_name'
+SQLALCHEMY_DATABASE_URL = f'postgresql://{settings.database_username}@{settings.database_hostname}:{settings.database_port}/{settings.database_name}'
 
 engine = create_engine(SQLALCHEMY_DATABASE_URL)
 
