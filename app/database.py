@@ -7,7 +7,7 @@ from .config import settings
 # import time
 
 # SQLALCHEMY_DATABASE_URL = 'postgresql://<username>:<password>@<ip-address/hostname>/<database_name'
-SQLALCHEMY_DATABASE_URL = f'postgresql://{settings.database_username}@{settings.database_hostname}:{settings.database_port}/{settings.database_name}'
+SQLALCHEMY_DATABASE_URL = 'postgres://cristina:m7Dfn9NCq2CypbQPNuZpcREZtbpMXamr@dpg-cgj05l7dvk4lfi5u0k8g-a.oregon-postgres.render.com/scramble'
 
 engine = create_engine(SQLALCHEMY_DATABASE_URL)
 
